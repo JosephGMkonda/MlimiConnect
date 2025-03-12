@@ -6,6 +6,7 @@ import database from "./config/database.js";
 import dotenv from 'dotenv';
 import AuthRoute from "./routes/AuthRoute.js";
 import PostRoute from "./routes/PostRoute.js"
+import commentRoute from "./routes/commentsRoute.js";
 import UserModel from "./models/UserModel.js";
 import PostModel from "./models/PostModel.js";
 import CommentModel from "./models/CommentModel.js";
@@ -50,6 +51,7 @@ app.use(express.json());
 
 app.use("/api/v1/auth", AuthRoute);
 app.use("/api/v1/post", PostRoute);
+app.use("/api/v1/comments", commentRoute);
 
 // store.sync();
 

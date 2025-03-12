@@ -18,4 +18,16 @@ const User = sequelize.define("User", {
     }
 })
 
+User.belongsToMany(User, {
+    through: "UserFollowers", 
+    as: "Followers", 
+    foreignKey: "followingId", 
+});
+
+User.belongsToMany(User, {
+    through: "UserFollowers", 
+    as: "Following", 
+    foreignKey: "followerId", 
+});
+
 export default User;

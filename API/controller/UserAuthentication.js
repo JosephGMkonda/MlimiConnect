@@ -76,3 +76,69 @@ export const getUser = async (req, res) => {
 
     }
 }
+
+
+export const followUser = async (req, res) => {
+    try {
+        const { followerId, followingId } = req.body;
+
+    
+        if (!followerId || !followingId) {
+            return res.status(400).json({ error: "followerId and followingId are required" });
+        }
+
+        
+        const follower = await User.findByPk(followerId);
+        const following = await User.findByPk(followingId);
+
+        if (!follower || !following) {
+            return res.status(404).json({ error: "User not found" });
+        }
+
+        
+        const isFollowing = await follower.hasFollowing(following);
+        if (isFollowing) {
+            return res.status(400).json({ error: "You are already following this user" });
+        }
+
+        
+        await follower.addFollowing(following);
+
+        res.status(200).json({ message: "Followed successfully" });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
+
+export const unfollowUser = async (req, res) => {
+    try {
+        const { followerId, followingId } = req.body;
+
+        
+        if (!followerId || !followingId) {
+            return res.status(400).json({ error: "followerId and followingId are required" });
+        }
+
+        
+        const follower = await User.findByPk(followerId);
+        const following = await User.findByPk(followingId);
+
+        if (!follower || !following) {
+            return res.status(404).json({ error: "User not found" });
+        }
+
+    
+        const isFollowing = await follower.hasFollowing(following);
+        if (!isFollowing) {
+            return res.status(400).json({ error: "You are not following this user" });
+        }
+
+        
+        await follower.removeFollowing(following);
+
+        res.status(200).json({ message: "Unfollowed successfully" });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
