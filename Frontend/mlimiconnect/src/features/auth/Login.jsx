@@ -1,7 +1,6 @@
-// src/features/auth/Login.jsx
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginUser } from './authSlice';
+import { login } from './authSlice';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
@@ -13,9 +12,9 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const result = await dispatch(loginUser({ username, password }));
+    const result = await dispatch(login({ username, password })); 
     if (result.payload) {
-      navigate('/'); 
+      navigate('/');
     }
   };
 
@@ -30,7 +29,7 @@ const Login = () => {
               Username
             </label>
             <input
-              type="username"
+              type="text" // Fix: Use type="text" instead of type="username"
               id="username"
               placeholder="Enter your username"
               value={username}

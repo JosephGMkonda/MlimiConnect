@@ -44,7 +44,7 @@ app.use(session({
 
 app.use(cors({
     credentials: true,
-    origin: []
+    origin: 5173
 }));
 
 app.use(express.json());

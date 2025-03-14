@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { registerUser } from './authSlice';
+import { register } from './authSlice';
 import { useNavigate } from 'react-router-dom';
 
 const Registration = () => {
@@ -14,7 +14,7 @@ const Registration = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const result = await dispatch(registerUser({ username,password, confirmPassword }));
+    const result = await dispatch(register({ username,password, confirmPassword }));
     if (result.payload) {
       navigate('/'); 
     }
@@ -59,7 +59,7 @@ const Registration = () => {
               confirmPassword
             </label>
             <input
-              type="confirmPassword"
+              type="password"
               id="confirmPassword"
               placeholder="Enter your confirmPassword"
               value={confirmPassword}
@@ -71,7 +71,7 @@ const Registration = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor:pointer"
           >
             {loading ? 'Registering...' : 'Register'}
           </button>

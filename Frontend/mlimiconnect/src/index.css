@@ -1,1 +1,13 @@
 @import "tailwindcss";
+
+
+
+
+@layer utilities {
+  .bg-brown-700 {
+    background-color: #8D6E63; 
+  }
+  .text-brown-700 {
+    color: #8D6E63; 
+  }
+}
